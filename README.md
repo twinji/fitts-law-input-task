@@ -1,2 +1,2 @@
-# canvas-boilerplate
-Boilerplate for JavaScript canvas projects.
+# fitts-law-input-task
+Fitts' Law experiment program.
