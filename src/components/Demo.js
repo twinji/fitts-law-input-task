@@ -15,12 +15,46 @@ export class Demo extends Component {
                     count: 8,
                     repetitions: 15,
                     direction: 1
+                },
+                {
+                    distance: 200,
+                    radius: 30,
+                    count: 8,
+                    repetitions: 15,
+                    direction: 1
                 }
             ],
             generated: [],
             results: [],
             currentSequenceIndex: 0,
+            currentRepetition: 1,
+            currentCircleIndex: 0
         }
+    }
+
+    onClick = (d, i) => {
+
+        if (i !== this.state.currentCircleIndex) {
+            console.log("MISS!")
+            return;
+        }
+
+        let currentSequenceIndex = this.state.currentSequenceIndex;
+        let s = this.state.sequences[currentSequenceIndex];
+        let currentCircleIndex = this.state.currentCircleIndex >= s.count - 1 ?  0 : this.state.currentCircleIndex + 1;
+        let currentRepetition = this.state.currentRepetition + 1;
+
+        if (currentRepetition > s.repetitions) {
+            currentRepetition = 1;
+            currentCircleIndex = 0;
+            currentSequenceIndex = currentSequenceIndex >= this.state.sequences.count - 1 ? 0 : currentSequenceIndex + 1;
+        }
+
+        this.setState({
+            currentCircleIndex,
+            currentRepetition,
+            currentSequenceIndex
+        }, this.renderCircles)
     }
     
     generateCircleData = () => {
@@ -36,22 +70,32 @@ export class Demo extends Component {
 
                 return {
                     circles: Array(s.count).fill().map((_, i) => {
+                        let rotationOffset = Math.PI * 1.5;
                         return {
-                            x: center.x + Math.cos(i * (rev / s.count)) * s.distance / 2,
-                            y: center.y + Math.sin(i * (rev / s.count)) * s.distance / 2,
-                            r: s.radius,
-                            c: 'crimson'
+                            x: center.x + Math.cos(rotationOffset + i * (rev / s.count)) * s.distance / 2,
+                            y: center.y + Math.sin(rotationOffset + i * (rev / s.count)) * s.distance / 2,
+                            radius: s.radius,
+                            color: 'lightgray',
+                            activeColor: 'crimson'
                         }
                     })
                 }
             })
-        }, () => {
+        }, this.renderCircles);
+    }
 
+    renderCircles = () => {
+
+        d3.selectAll("svg > *").remove();
+        
         let svgContainer = d3
-            .select("#demoContainer")
-            .append("svg")
+            .select("#demoContainer > svg")
             .attr("width", this.container.clientWidth)
-            .attr("height", this.container.clientHeight);
+            .attr("height", this.container.clientHeight)
+            .on("click", e => {
+                d3.event.stopPropagation();
+                this.onClick(null, -1);
+            });
 
         let circles = svgContainer
             .selectAll("circle")
@@ -59,13 +103,15 @@ export class Demo extends Component {
             .enter()
             .append("circle");
 
-        let circleAttributes = circles
+        circles
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
-            .attr("r", d => d.r)
-            .attr("fill", d => d.c)
-
-        });
+            .attr("r", d => d.radius)
+            .attr("fill", (d, i) => i === this.state.currentCircleIndex ? d.activeColor : d.color)
+            .on("click", (d, i) => {
+                d3.event.stopPropagation();
+                this.onClick(d, i);
+            });
     }
     
     componentDidMount() {
@@ -75,9 +121,10 @@ export class Demo extends Component {
     render() {
 
         const containerStyle = {
-            width: '350px',
-            height: '350px',
+            width: 'auto',
+            height: 'auto',
             position: 'absolute',
+            zIndex: -100,
             right: 0, left: 0, top: 0, bottom: 0,
             margin: 'auto',
             maxWidth: '100%',
@@ -87,7 +134,7 @@ export class Demo extends Component {
 
         return (
             <React.Fragment>
-                <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}></div>
+                <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}><svg></svg></div>
             </React.Fragment>
         )
     }
