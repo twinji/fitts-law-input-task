@@ -8,6 +8,8 @@ export class Demo extends Component {
         super(props);
 
         this.state = {
+            username: "Twinji",
+            device: "Mouse",
             sequences: [
                 {
                     distance: 300,
@@ -30,31 +32,103 @@ export class Demo extends Component {
             currentRepetition: 1,
             currentCircleIndex: 0
         }
+
+        this.restartTimer();
+    }
+
+    restartTimer = () => {
+        this.startTime = performance.now();
+        this.timeElapsed = null;
+    }
+
+    stopTimer = () => {
+        this.timeElapsed = performance.now() - this.startTime;
     }
 
     onClick = (d, i) => {
 
-        if (i !== this.state.currentCircleIndex) {
-            console.log("MISS!");
-            return;
+        let hit = i === this.state.currentCircleIndex;
+
+        if (hit) {
+            this.stopTimer();
         }
 
-        let currentSequenceIndex = this.state.currentSequenceIndex;
-        let s = this.state.sequences[currentSequenceIndex];
-        let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
-        let currentRepetition = this.state.currentRepetition + 1;
+        const s = this.state.sequences[this.state.currentSequenceIndex];
 
-        if (currentRepetition > s.repetitions) {
-            currentRepetition = 1;
-            currentCircleIndex = 0;
-            currentSequenceIndex = currentSequenceIndex >= this.state.sequences.length - 1 ? 0 : currentSequenceIndex + 1;
+        this.appendResultLog(
+            this.state.username,
+            this.state.device,
+            this.state.currentSequenceIndex + 1,
+            this.state.currentRepetition,
+            s.distance,
+            s.radius,
+            s.direction,
+            hit,
+            this.timeElapsed
+        );
+
+        if (hit)
+        {
+            let currentSequenceIndex = this.state.currentSequenceIndex;
+            let s = this.state.sequences[currentSequenceIndex];
+            let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
+            let currentRepetition = this.state.currentRepetition + 1;
+
+            if (currentRepetition > s.repetitions) {
+                currentRepetition = 1;
+                currentCircleIndex = 0;
+                currentSequenceIndex = currentSequenceIndex >= this.state.sequences.length - 1 ? 0 : currentSequenceIndex + 1;
+            }
+
+            this.setState({
+                currentCircleIndex,
+                currentRepetition,
+                currentSequenceIndex
+            }, () => {
+                this.renderCircles();
+                this.restartTimer();
+            });
         }
+    }
 
-        this.setState({
-            currentCircleIndex,
-            currentRepetition,
-            currentSequenceIndex
-        }, this.renderCircles)
+    appendResultLog = (username, device, sequence, rep, distance, radius, direction, hit, time) => {
+
+        let existingLog = false;
+        var modifiedResults = this.state.results.map(l => {
+            if (l.username === username && l.device === device && l.sequence === sequence && l.rep === rep) {
+                existingLog = true;
+                l.timestamp = Date.now();
+                if (!hit) {
+                    l.misses++;
+                } else {
+                    l.hit = hit;
+                    l.time = this.timeElapsed;
+                }
+            }
+            return l;
+        });
+
+        if (existingLog) {
+            this.setState({
+                results: modifiedResults
+            });
+        } else {
+            this.setState(prevState => ({
+                results: [...prevState.results, {
+                    username, 
+                    device, 
+                    sequence, 
+                    rep, 
+                    distance, 
+                    radius, 
+                    direction, 
+                    hit, 
+                    time, 
+                    misses: hit ? 0 : 1, 
+                    timestamp: Date.now()
+                }]
+            }));
+        }
     }
     
     generateCircleData = () => {
