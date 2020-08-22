@@ -12,14 +12,14 @@ export class Demo extends Component {
                 {
                     distance: 300,
                     radius: 20,
-                    count: 8,
+                    count: 9,
                     repetitions: 15,
                     direction: 1
                 },
                 {
                     distance: 200,
                     radius: 30,
-                    count: 8,
+                    count: 9,
                     repetitions: 15,
                     direction: 1
                 }
@@ -35,19 +35,19 @@ export class Demo extends Component {
     onClick = (d, i) => {
 
         if (i !== this.state.currentCircleIndex) {
-            console.log("MISS!")
+            console.log("MISS!");
             return;
         }
 
         let currentSequenceIndex = this.state.currentSequenceIndex;
         let s = this.state.sequences[currentSequenceIndex];
-        let currentCircleIndex = this.state.currentCircleIndex >= s.count - 1 ?  0 : this.state.currentCircleIndex + 1;
+        let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
         let currentRepetition = this.state.currentRepetition + 1;
 
         if (currentRepetition > s.repetitions) {
             currentRepetition = 1;
             currentCircleIndex = 0;
-            currentSequenceIndex = currentSequenceIndex >= this.state.sequences.count - 1 ? 0 : currentSequenceIndex + 1;
+            currentSequenceIndex = currentSequenceIndex >= this.state.sequences.length - 1 ? 0 : currentSequenceIndex + 1;
         }
 
         this.setState({
