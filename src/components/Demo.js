@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Login from './Login';
 
 export class Demo extends Component {
 
@@ -12,8 +13,8 @@ export class Demo extends Component {
         this.state = {
             isActive: false,
             isComplete : false,
-            username: "Twinji",
-            device: "Mouse",
+            username: '',
+            device: '',
             sequences: [
                 {
                     distance: 300,
@@ -42,6 +43,8 @@ export class Demo extends Component {
 
     startTest = () => {
         this.setState({
+            username: '',
+            device: '',
             isActive: false,
             isComplete: false,
             generated: [],
@@ -84,6 +87,13 @@ export class Demo extends Component {
 
     stopTimer = () => {
         this.timeElapsed = performance.now() - this.startTime;
+    }
+
+    onLoginDetailsChange = (loginData) => {
+        this.setState({
+            username: loginData.username,
+            device: loginData.device
+        })
     }
 
     onClick = (d, i) => {
@@ -265,7 +275,7 @@ export class Demo extends Component {
 
         return (
             <React.Fragment>
-                <Modal centered show={!this.state.isActive} onHide={this.resumeTest}>
+                <Modal centered keyboard={false} show={!this.state.isActive} onHide={this.resumeTest} backdrop="static">
                     <Modal.Header>
                         {
                             (this.inSequence() || this.state.isComplete) &&
@@ -281,6 +291,9 @@ export class Demo extends Component {
                         }
                     </Modal.Header>
                     <Modal.Body>
+                        {
+                            !this.inSequence() && !this.state.isComplete && <Login onChange={this.onLoginDetailsChange}/>
+                        }
                         { 
                             this.inSequence() ? 
                                 'Take a break and proceed to the next sequence when you are ready.' : 
@@ -290,7 +303,7 @@ export class Demo extends Component {
                     <Modal.Footer>
                         {
                             !this.state.isComplete &&
-                            <Button variant="primary" onClick={this.resumeTest}>
+                            <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username}>
                                 { this.inSequence() ? 'Proceed' : 'Begin'  }
                             </Button>
                         }
