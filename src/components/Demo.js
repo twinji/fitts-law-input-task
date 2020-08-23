@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import ModalFooter from 'react-bootstrap/ModalFooter';
+import ModalBody from 'react-bootstrap/ModalBody';
+import ModalTitle from 'react-bootstrap/ModalTitle';
+import ModalHeader from 'react-bootstrap/ModalHeader';
+import ModalDialog from 'react-bootstrap/ModalDialog';
 
 export class Demo extends Component {
 
@@ -8,6 +15,7 @@ export class Demo extends Component {
         super(props);
 
         this.state = {
+            isActive: false,
             username: "Twinji",
             device: "Mouse",
             sequences: [
@@ -36,6 +44,18 @@ export class Demo extends Component {
         this.restartTimer();
     }
 
+    resumeTest = () => {
+        this.setState({
+            isActive: true
+        });
+    }
+
+    pauseTest = () => {
+        this.setState({
+            isActive: false
+        });
+    }
+
     restartTimer = () => {
         this.startTime = performance.now();
         this.timeElapsed = null;
@@ -46,6 +66,9 @@ export class Demo extends Component {
     }
 
     onClick = (d, i) => {
+
+        if (!this.state.isActive)
+            return;
 
         let hit = i === this.state.currentCircleIndex;
 
@@ -67,8 +90,7 @@ export class Demo extends Component {
             this.timeElapsed
         );
 
-        if (hit)
-        {
+        if (hit) {
             let currentSequenceIndex = this.state.currentSequenceIndex;
             let s = this.state.sequences[currentSequenceIndex];
             let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
@@ -78,6 +100,7 @@ export class Demo extends Component {
                 currentRepetition = 1;
                 currentCircleIndex = 0;
                 currentSequenceIndex = currentSequenceIndex >= this.state.sequences.length - 1 ? 0 : currentSequenceIndex + 1;
+                this.pauseTest();
             }
 
             this.setState({
@@ -129,6 +152,10 @@ export class Demo extends Component {
                 }]
             }));
         }
+    }
+
+    inSequence = () => {
+        return this.state.currentSequenceIndex > 0;
     }
     
     generateCircleData = () => {
@@ -208,7 +235,33 @@ export class Demo extends Component {
 
         return (
             <React.Fragment>
-                <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}><svg></svg></div>
+                <Modal show={!this.state.isActive} onHide={this.resumeTest}>
+                    <Modal.Header>
+                        {
+                            this.inSequence() &&
+                            <Modal.Title>
+                                Sequence {this.state.currentSequenceIndex} out of {this.state.sequences.length} complete
+                            </Modal.Title>
+                        }
+                        {              
+                            !this.inSequence() &&
+                            <Modal.Title>
+                                Please enter details below to begin
+                            </Modal.Title>
+                        }
+                    </Modal.Header>
+                    <Modal.Body>
+                        { this.inSequence() ? 'Take a break and proceed to the next sequence when you are ready.' : 'WIP' }
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.resumeTest}>
+                            { this.inSequence() ? 'Proceed' : 'Begin' }
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}>
+                    <svg></svg>
+                </div>
             </React.Fragment>
         )
     }
