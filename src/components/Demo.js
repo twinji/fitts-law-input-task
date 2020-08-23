@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import ModalFooter from 'react-bootstrap/ModalFooter';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalTitle from 'react-bootstrap/ModalTitle';
-import ModalHeader from 'react-bootstrap/ModalHeader';
-import ModalDialog from 'react-bootstrap/ModalDialog';
 
 export class Demo extends Component {
 
@@ -16,6 +11,7 @@ export class Demo extends Component {
 
         this.state = {
             isActive: false,
+            isComplete : false,
             username: "Twinji",
             device: "Mouse",
             sequences: [
@@ -44,6 +40,24 @@ export class Demo extends Component {
         this.restartTimer();
     }
 
+    startTest = () => {
+        this.setState({
+            isActive: false,
+            isComplete: false,
+            generated: [],
+            results: [],
+            currentSequenceIndex: 0,
+            currentRepetition: 1,
+            currentCircleIndex: 0
+        }, () => {
+            this.generateCircleData();
+        });
+    }
+
+    getResults = () => {
+
+    }
+
     resumeTest = () => {
         this.setState({
             isActive: true
@@ -53,6 +67,13 @@ export class Demo extends Component {
     pauseTest = () => {
         this.setState({
             isActive: false
+        });
+    }
+
+    completeTest = () => {
+        this.setState({
+            isActive: false,
+            isComplete: true
         });
     }
 
@@ -95,12 +116,19 @@ export class Demo extends Component {
             let s = this.state.sequences[currentSequenceIndex];
             let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
             let currentRepetition = this.state.currentRepetition + 1;
+            let isComplete = false;
 
             if (currentRepetition > s.repetitions) {
                 currentRepetition = 1;
                 currentCircleIndex = 0;
-                currentSequenceIndex = currentSequenceIndex >= this.state.sequences.length - 1 ? 0 : currentSequenceIndex + 1;
-                this.pauseTest();
+                currentSequenceIndex++;
+
+                if (currentSequenceIndex >= this.state.sequences.length) {
+                    this.completeTest();
+                    isComplete = true;
+                } else {
+                    this.pauseTest();
+                }
             }
 
             this.setState({
@@ -108,8 +136,10 @@ export class Demo extends Component {
                 currentRepetition,
                 currentSequenceIndex
             }, () => {
-                this.renderCircles();
-                this.restartTimer();
+                if (!isComplete) {
+                    this.renderCircles();
+                    this.restartTimer();
+                }
             });
         }
     }
@@ -155,7 +185,7 @@ export class Demo extends Component {
     }
 
     inSequence = () => {
-        return this.state.currentSequenceIndex > 0;
+        return this.state.currentSequenceIndex > 0 && !this.state.isComplete;
     }
     
     generateCircleData = () => {
@@ -216,7 +246,7 @@ export class Demo extends Component {
     }
     
     componentDidMount() {
-        this.generateCircleData();
+        this.startTest();
     }
 
     render() {
@@ -235,28 +265,46 @@ export class Demo extends Component {
 
         return (
             <React.Fragment>
-                <Modal show={!this.state.isActive} onHide={this.resumeTest}>
+                <Modal centered show={!this.state.isActive} onHide={this.resumeTest}>
                     <Modal.Header>
                         {
-                            this.inSequence() &&
+                            (this.inSequence() || this.state.isComplete) &&
                             <Modal.Title>
                                 Sequence {this.state.currentSequenceIndex} out of {this.state.sequences.length} complete
                             </Modal.Title>
                         }
                         {              
-                            !this.inSequence() &&
+                            !this.inSequence() && !this.state.isComplete &&
                             <Modal.Title>
-                                Please enter details below to begin
+                                Fitt's law demo
                             </Modal.Title>
                         }
                     </Modal.Header>
                     <Modal.Body>
-                        { this.inSequence() ? 'Take a break and proceed to the next sequence when you are ready.' : 'WIP' }
+                        { 
+                            this.inSequence() ? 
+                                'Take a break and proceed to the next sequence when you are ready.' : 
+                                    (this.state.isComplete ? 'You have completed this demo, click below to view results.' : 'Select the red circles as they appear to the best of your ability.') 
+                        }
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.resumeTest}>
-                            { this.inSequence() ? 'Proceed' : 'Begin' }
-                        </Button>
+                        {
+                            !this.state.isComplete &&
+                            <Button variant="primary" onClick={this.resumeTest}>
+                                { this.inSequence() ? 'Proceed' : 'Begin'  }
+                            </Button>
+                        }
+                        {
+                            this.state.isComplete && 
+                            <React.Fragment>
+                                <Button variant="secondary" onClick={this.startTest}>
+                                    Retry demo
+                                </Button>
+                                <Button variant="primary" onClick={this.getResults}>
+                                    Get results
+                                </Button>
+                            </React.Fragment>
+                        }
                     </Modal.Footer>
                 </Modal>
                 <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}>
