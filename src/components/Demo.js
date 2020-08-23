@@ -38,11 +38,9 @@ export class Demo extends Component {
             currentRepetition: 1,
             currentCircleIndex: 0
         }
-
-        this.restartTimer();
     }
 
-    startTest = () => {
+    resetTest = () => {
         this.setState({
             username: '',
             device: '',
@@ -74,6 +72,7 @@ export class Demo extends Component {
         this.setState({
             isActive: true
         });
+        this.restartTimer();
     }
 
     pauseTest = () => {
@@ -265,7 +264,7 @@ export class Demo extends Component {
     }
     
     componentDidMount() {
-        this.startTest();
+        this.resetTest();
     }
 
     render() {
@@ -319,7 +318,7 @@ export class Demo extends Component {
                         {
                             this.state.isComplete && 
                             <React.Fragment>
-                                <Button variant="secondary" onClick={this.startTest}>
+                                <Button variant="secondary" onClick={this.resetTest}>
                                     Retry demo
                                 </Button>
                                 <Button variant="primary" onClick={this.getResults}>
