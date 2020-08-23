@@ -48,14 +48,16 @@ export class Login extends Component {
                     <Form.Group as={Col} md="6" controlId="loginForm.ControlInputDevice">
                         <Form.Label>Device</Form.Label>
                         <Form.Control 
-                            as="select" 
+                            as="select"
+                            defaultValue="" 
                             required 
                             onChange={this.onChange}
                             name="device"
                         >
-                            <option>Mouse</option>
-                            <option>Trackpad</option>
-                            <option>Touchscreen</option>
+                            <option value="" selected disabled hidden>Select a device</option>
+                            <option value="mouse">Mouse</option>
+                            <option value="trackpad">Trackpad</option>
+                            <option value="touchscreen">Touchscreen</option>
                         </Form.Control>
                         <Form.Control.Feedback type="invalid">
                             Please select your input device

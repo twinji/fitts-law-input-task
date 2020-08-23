@@ -311,7 +311,7 @@ export class Demo extends Component {
                     <Modal.Footer>
                         {
                             !this.state.isComplete &&
-                            <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username}>
+                            <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username || !this.state.device}>
                                 { this.inSequence() ? 'Proceed' : 'Begin'  }
                             </Button>
                         }
