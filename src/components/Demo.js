@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Login from './Login';
+import FileSaver from 'file-saver';
 
 export class Demo extends Component {
 
@@ -58,9 +59,17 @@ export class Demo extends Component {
     }
 
     getResults = () => {
-
+        this.generateCsvFromResultLogs();
     }
+    
+    generateCsvFromResultLogs = () => {
+        const csv = Object.keys(this.state.results[0]).join(',') + '\n'
+            + this.state.results.map(l => Object.values(l).join(',')).join('\n');
 
+        const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        FileSaver.saveAs(csvData, 'fitts_law_results_' + Date.now().toString() + '.csv');
+    }
+    
     resumeTest = () => {
         this.setState({
             isActive: true
