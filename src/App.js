@@ -10,12 +10,9 @@ export default function App() {
     <Router>
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
-          <Link className="navbar-brand" to="/">Fitts' Law Demo</Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
+          <div className="container py-0 my-0">
+            <Link className="navbar-brand" to="/">Fitts' Law Demo</Link>
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>
