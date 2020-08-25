@@ -1,1 +1,9 @@
 @import '~bootstrap/scss/bootstrap.scss';
+
+.modal-backdrop {
+    z-index: -11 !important;
+}
+
+.modal {
+    z-index: -10 !important;
+}
