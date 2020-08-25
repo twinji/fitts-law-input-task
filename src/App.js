@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
+import About from './components/About';
 import Demo from './components/Demo';
 
 
@@ -20,17 +20,17 @@ export default function App() {
                 <Link className="nav-link" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/demo">Demo</Link>
+                <Link className="nav-link" to="/about">About</Link>
               </li>
             </ul>
           </div>
         </nav>
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Demo/>
           </Route>
-          <Route path="/demo">
-            <Demo />
+          <Route path="/about">
+            <About/>
           </Route>
         </Switch>
       </div>
