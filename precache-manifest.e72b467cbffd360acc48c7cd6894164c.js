@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8dee0036c90a5eefbd02771aab9fd120",
+    "revision": "4d8c40ef1d4376b857ca6960e4915e3c",
     "url": "/fitts-law-input-task/index.html"
   },
   {
