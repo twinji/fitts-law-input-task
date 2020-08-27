@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/fitts-law-input-task/static/css/main.3af2278f.chunk.css",
-    "main.js": "/fitts-law-input-task/static/js/main.7133ce2c.chunk.js",
-    "main.js.map": "/fitts-law-input-task/static/js/main.7133ce2c.chunk.js.map",
+    "main.js": "/fitts-law-input-task/static/js/main.8fe04c31.chunk.js",
+    "main.js.map": "/fitts-law-input-task/static/js/main.8fe04c31.chunk.js.map",
     "runtime-main.js": "/fitts-law-input-task/static/js/runtime-main.f964db4e.js",
     "runtime-main.js.map": "/fitts-law-input-task/static/js/runtime-main.f964db4e.js.map",
-    "static/js/2.54d812b3.chunk.js": "/fitts-law-input-task/static/js/2.54d812b3.chunk.js",
-    "static/js/2.54d812b3.chunk.js.map": "/fitts-law-input-task/static/js/2.54d812b3.chunk.js.map",
+    "static/js/2.159eb6c2.chunk.js": "/fitts-law-input-task/static/js/2.159eb6c2.chunk.js",
+    "static/js/2.159eb6c2.chunk.js.map": "/fitts-law-input-task/static/js/2.159eb6c2.chunk.js.map",
     "index.html": "/fitts-law-input-task/index.html",
-    "precache-manifest.f5ec4735e90896b8d41562b0f8ab63da.js": "/fitts-law-input-task/precache-manifest.f5ec4735e90896b8d41562b0f8ab63da.js",
+    "precache-manifest.b6d56305d281cc098f4e6e6de4ad7156.js": "/fitts-law-input-task/precache-manifest.b6d56305d281cc098f4e6e6de4ad7156.js",
     "service-worker.js": "/fitts-law-input-task/service-worker.js",
     "static/css/main.3af2278f.chunk.css.map": "/fitts-law-input-task/static/css/main.3af2278f.chunk.css.map",
-    "static/js/2.54d812b3.chunk.js.LICENSE.txt": "/fitts-law-input-task/static/js/2.54d812b3.chunk.js.LICENSE.txt"
+    "static/js/2.159eb6c2.chunk.js.LICENSE.txt": "/fitts-law-input-task/static/js/2.159eb6c2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.f964db4e.js",
-    "static/js/2.54d812b3.chunk.js",
+    "static/js/2.159eb6c2.chunk.js",
     "static/css/main.3af2278f.chunk.css",
-    "static/js/main.7133ce2c.chunk.js"
+    "static/js/main.8fe04c31.chunk.js"
   ]
 }
