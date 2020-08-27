@@ -1,6 +1,8 @@
 ## Fitt's Law Input Task
 Fitts' Law experiment/demo web application.
 
+Link: http://twinji.github.io/fitts-law-input-task/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
