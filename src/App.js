@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import About from './components/About';
 import Demo from './components/Demo';
@@ -7,7 +7,7 @@ import Demo from './components/Demo';
 
 export default function App() {
   return (
-    <Router basename={`${process.env.PUBLIC_URL}/`}>
+    <Router basename="/">
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
           <div className="container py-0 my-0">
