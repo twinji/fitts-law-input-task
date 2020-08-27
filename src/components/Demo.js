@@ -30,6 +30,34 @@ export class Demo extends Component {
                     count: 9,
                     repetitions: 15,
                     direction: 1
+                },
+                {
+                    distance: 700,
+                    radius: 10,
+                    count: 9,
+                    repetitions: 15,
+                    direction: 1
+                },
+                {
+                    distance: 600,
+                    radius: 40,
+                    count: 9,
+                    repetitions: 15,
+                    direction: 1
+                },
+                {
+                    distance: 400,
+                    radius: 60,
+                    count: 9,
+                    repetitions: 15,
+                    direction: 1
+                },
+                {
+                    distance: 200,
+                    radius: 10,
+                    count: 9,
+                    repetitions: 15,
+                    direction: 1
                 }
             ],
             generated: [],
