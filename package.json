@@ -1,5 +1,6 @@
 {
   "name": "fitts-law-input-task",
+  "homepage": "https://twinji.github.io/fitts-law-input-task/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -7,7 +7,7 @@ import Demo from './components/Demo';
 
 export default function App() {
   return (
-    <Router>
+    <Router basename={`${process.env.PUBLIC_URL}/`}>
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light bg-light rounded">
           <div className="container py-0 my-0">
