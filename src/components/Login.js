@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-import Col from 'react-bootstrap/Col'
+import Col from 'react-bootstrap/Col';
 
 export class Login extends Component {
 
