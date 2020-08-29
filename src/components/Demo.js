@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Login from './Login';
 import FileSaver from 'file-saver';
+import Sequences from '../data/sequences.json';
 
 export class Demo extends Component {
 
@@ -16,50 +17,7 @@ export class Demo extends Component {
             isComplete : false,
             username: '',
             device: '',
-            sequences: [
-                {
-                    distance: 300,
-                    radius: 20,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                },
-                {
-                    distance: 200,
-                    radius: 30,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                },
-                {
-                    distance: 700,
-                    radius: 10,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                },
-                {
-                    distance: 600,
-                    radius: 40,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                },
-                {
-                    distance: 400,
-                    radius: 60,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                },
-                {
-                    distance: 200,
-                    radius: 10,
-                    count: 9,
-                    repetitions: 15,
-                    direction: 1
-                }
-            ],
+            sequences: Sequences,
             generated: [],
             results: [],
             currentSequenceIndex: 0,
