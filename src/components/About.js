@@ -17,10 +17,18 @@ export class About extends Component {
                     <p>Built with React, D3, and FileShare by Vishnu Gunapathi.</p>
                     <hr/>
                     <div className="icon-container">
-                        <a target="_blank" href="https://github.com/twinji"><img src="https://raw.githubusercontent.com/twinji/twinji/master/icons/github.svg"/></a>
-                        <a target="_blank" href="https://www.instagram.com/_twinji/"><img src="https://raw.githubusercontent.com/twinji/twinji/master/icons/instagram.svg"/></a>
-                        <a target="_blank" href="https://www.linkedin.com/in/twinji/"><img src="https://raw.githubusercontent.com/twinji/twinji/master/icons/linkedin.svg"/></a>
-                        <a target="_blank" href="https://twitter.com/_twinji"><img src="https://raw.githubusercontent.com/twinji/twinji/master/icons/twitter.svg"/></a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/twinji">
+                            <img alt="GitHub" src="https://raw.githubusercontent.com/twinji/twinji/master/icons/github.svg"/>
+                        </a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/_twinji/">
+                            <img alt="Instagram" src="https://raw.githubusercontent.com/twinji/twinji/master/icons/instagram.svg"/>
+                        </a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/twinji/">
+                            <img alt="LinkedIn" src="https://raw.githubusercontent.com/twinji/twinji/master/icons/linkedin.svg"/>
+                        </a>
+                        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/_twinji">
+                            <img alt="Twitter" src="https://raw.githubusercontent.com/twinji/twinji/master/icons/twitter.svg"/>
+                        </a>
                     </div>
                 </div>
             </React.Fragment>
