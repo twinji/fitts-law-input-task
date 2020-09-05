@@ -264,13 +264,30 @@ export class Demo extends Component {
         const containerStyle = {
             width: 'auto',
             height: 'auto',
-            position: 'absolute',
-            zIndex: -100,
+            position: 'fixed',
+            zIndex: -99,
             right: 0, left: 0, top: 0, bottom: 0,
             margin: 'auto',
             maxWidth: '100%',
             maxHeight: '100%',
-            overflow: 'visible'
+            overflow: 'visible',
+        }
+
+        const statusBarStyle = {
+            width: 'auto',
+            height: 'auto',
+            position: 'absolute',
+            zIndex: -100,
+            right: 0, left: 0, top: 55,
+            padding: 6,
+            fontWeight: 'bold',
+            margin: 'auto',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            overflow: 'visible',
+            backgroundColor: 'orange',
+            color: 'white',
+            fontSize: '20px',
         }
 
         return (
@@ -330,6 +347,10 @@ export class Demo extends Component {
                     </Modal.Footer>
                 </Modal>
                 <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}>
+                    {
+                        this.state.isPractice &&
+                        <span style={statusBarStyle}>Practice run</span>
+                    }
                     <svg></svg>
                 </div>
             </React.Fragment>
