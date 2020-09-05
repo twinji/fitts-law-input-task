@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Login from './Login';
 import FileSaver from 'file-saver';
-import Sequences from '../data/sequences.json';
+import TestSequences from '../data/test_sequences.json';
+import PracticeSequences from '../data/practice_sequences.json';
 
 export class Demo extends Component {
 
@@ -15,9 +16,10 @@ export class Demo extends Component {
         this.state = {
             isActive: false,
             isComplete : false,
+            isPractice: null,
             username: '',
             device: '',
-            sequences: Sequences,
+            sequences: null,
             generated: [],
             results: [],
             currentSequenceIndex: 0,
@@ -27,7 +29,11 @@ export class Demo extends Component {
     }
 
     resetTest = () => {
+
+        let isPractice = this.state.isPractice == null ? true : !this.state.isPractice;
         this.setState({
+            isPractice,
+            sequences: isPractice ? PracticeSequences : TestSequences,
             username: '',
             device: '',
             isActive: false,
@@ -274,7 +280,7 @@ export class Demo extends Component {
                         {
                             (this.inSequence() || this.state.isComplete) &&
                             <Modal.Title>
-                                Sequence {this.state.currentSequenceIndex} out of {this.state.sequences.length} complete
+                                {this.state.isPractice ? 'Practice sequence' : 'Sequence'} {this.state.currentSequenceIndex} out of {this.state.sequences.length} complete
                             </Modal.Title>
                         }
                         {              
@@ -291,18 +297,27 @@ export class Demo extends Component {
                         { 
                             this.inSequence() ? 
                                 'Take a break and proceed to the next sequence when you are ready.' : 
-                                    (this.state.isComplete ? 'You have completed this demo, click below to view results.' : 'Select the red circles as they appear to the best of your ability.') 
+                                    (this.state.isComplete ? (this.state.isPractice ? 'You have completed the practice run, click below to continue.' : 'You have completed this demo, click below to view results.') : 
+                                        'Select the red circles as they appear to the best of your ability.') 
                         }
                     </Modal.Body>
                     <Modal.Footer>
                         {
                             !this.state.isComplete &&
                             <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username || !this.state.device}>
-                                { this.inSequence() ? 'Proceed' : 'Begin'  }
+                                { this.inSequence() ? 'Proceed' : (this.state.isPractice ? 'Begin practice' : 'Begin test')  }
                             </Button>
                         }
                         {
-                            this.state.isComplete && 
+                            (this.state.isComplete && this.state.isPractice) && 
+                            <React.Fragment>
+                                <Button variant="secondary" onClick={this.resetTest}>
+                                    Continue
+                                </Button>
+                            </React.Fragment>
+                        }
+                        {
+                            (this.state.isComplete && !this.state.isPractice) && 
                             <React.Fragment>
                                 <Button variant="secondary" onClick={this.resetTest}>
                                     Retry demo
