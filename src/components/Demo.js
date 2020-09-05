@@ -315,7 +315,7 @@ export class Demo extends Component {
                             this.inSequence() ? 
                                 'Take a break and proceed to the next sequence when you are ready.' : 
                                     (this.state.isComplete ? (this.state.isPractice ? 'You have completed the practice run, click below to continue.' : 'You have completed this demo, click below to view results.') : 
-                                        'Select the red circles as they appear to the best of your ability.') 
+                                        'Select the red circles as they appear as quickly as possible to the best of your ability.') 
                         }
                     </Modal.Body>
                     <Modal.Footer>
