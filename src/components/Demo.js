@@ -77,6 +77,9 @@ export class Demo extends Component {
         this.setState({
             isActive: false,
             isComplete: true
+        }, () => {
+            if (!this.state.isPractice)
+                this.getResults();
         });
     }
 
