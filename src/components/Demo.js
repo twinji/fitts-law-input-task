@@ -285,7 +285,7 @@ export class Demo extends Component {
             maxWidth: '100%',
             maxHeight: '100%',
             overflow: 'visible',
-            backgroundColor: 'orange',
+            backgroundColor: this.state.isPractice ? 'orange' : 'lightblue',
             color: 'white',
             fontSize: '20px',
         }
@@ -348,8 +348,12 @@ export class Demo extends Component {
                 </Modal>
                 <div id="demoContainer" ref={ container => this.container = container } style={containerStyle}>
                     {
-                        this.state.isPractice &&
-                        <span style={statusBarStyle}>Practice run</span>
+                        this.state.sequences !== null &&
+                        <span style={statusBarStyle}>
+                            {this.state.isPractice ? 'Practice sequence' : 'Sequence'}
+                            &nbsp;
+                            {Math.min(this.state.currentSequenceIndex + 1, this.state.sequences.length)}/{this.state.sequences.length}
+                            </span>
                     }
                     <svg></svg>
                 </div>
