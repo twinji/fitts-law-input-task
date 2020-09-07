@@ -40,5 +40,19 @@
         "count": 9,
         "repetitions": 15,
         "direction": 1
+    },
+    {
+        "distance": 100,
+        "radius": 10,
+        "count": 9,
+        "repetitions": 15,
+        "direction": 1
+    },
+    {
+        "distance": 600,
+        "radius": 50,
+        "count": 9,
+        "repetitions": 15,
+        "direction": 1
     }
 ]
