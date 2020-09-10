@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/fitts-law-input-task/precache-manifest.0d33b2a8cf247fe322288dc2d8b5b11e.js"
+  "/fitts-law-input-task/precache-manifest.48fc6c75b3925b2b4264cc3dfba6ead7.js"
 );
 
 self.addEventListener('message', (event) => {
