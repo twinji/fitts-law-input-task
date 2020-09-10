@@ -204,7 +204,7 @@ export class Demo extends Component {
             });
         } else {
 
-            let id = Math.log2((2 * distanceFromPrevious) / (radius * 2));
+            let id = Math.log2(distanceFromPrevious / (radius * 2));
             let ip = id / time;
 
             this.setState(prevState => ({
