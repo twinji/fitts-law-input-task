@@ -24,7 +24,8 @@ export class Demo extends Component {
             results: [],
             currentSequenceIndex: 0,
             currentRepetition: 1,
-            currentCircleIndex: 0
+            currentCircleIndex: 0,
+            previousCircleIndex: null
         }
     }
 
@@ -42,7 +43,8 @@ export class Demo extends Component {
             results: [],
             currentSequenceIndex: 0,
             currentRepetition: 1,
-            currentCircleIndex: 0
+            currentCircleIndex: 0,
+            previousCircleIndex: null
         }, () => {
             this.generateCircleData();
         });
@@ -99,25 +101,44 @@ export class Demo extends Component {
         })
     }
 
+    calculateDistance = (x1, x2, y1, y2) => {
+        let deltaX = x2 - x1;
+        let deltaY = y2 - y1;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+
     onClick = (d, i) => {
 
         if (!this.state.isActive)
             return;
 
         let hit = i === this.state.currentCircleIndex;
+        if (hit) this.stopTimer();
 
-        if (hit) {
-            this.stopTimer();
-        }
+        let si = this.state.currentSequenceIndex;
+        let c = {
+            x: this.state.generated[si].circles[this.state.currentCircleIndex].x,
+            y: this.state.generated[si].circles[this.state.currentCircleIndex].y
+        };
+        let p = this.state.previousCircleIndex !== null ? {
+            x: this.state.generated[si].circles[this.state.previousCircleIndex].x,
+            y: this.state.generated[si].circles[this.state.previousCircleIndex].y
+        } : {
+            x: this.container.clientWidth / 2,
+            y: this.container.clientHeight / 2
+        };
 
-        const s = this.state.sequences[this.state.currentSequenceIndex];
+        let distanceFromPrevious = this.calculateDistance(c.x, p.x, c.y, p.y);
+
+        const s = this.state.sequences[si];
 
         this.appendResultLog(
             this.state.username,
             this.state.device,
             this.state.currentSequenceIndex + 1,
             this.state.currentRepetition,
-            s.distance,
+            s.circlePathDiamater,
+            distanceFromPrevious,
             s.radius,
             s.direction,
             hit,
@@ -127,6 +148,7 @@ export class Demo extends Component {
         if (hit) {
             let currentSequenceIndex = this.state.currentSequenceIndex;
             let s = this.state.sequences[currentSequenceIndex];
+            let previousCircleIndex = this.state.currentCircleIndex;
             let currentCircleIndex = (this.state.currentCircleIndex + Math.round(s.count / 2)) % s.count;
             let currentRepetition = this.state.currentRepetition + 1;
             let isComplete = false;
@@ -147,7 +169,8 @@ export class Demo extends Component {
             this.setState({
                 currentCircleIndex,
                 currentRepetition,
-                currentSequenceIndex
+                currentSequenceIndex,
+                previousCircleIndex
             }, () => {
                 if (!isComplete) {
                     this.renderCircles();
@@ -157,7 +180,7 @@ export class Demo extends Component {
         }
     }
 
-    appendResultLog = (username, device, sequence, rep, distance, radius, direction, hit, time) => {
+    appendResultLog = (username, device, sequence, rep, circlePathDiamater, distanceFromPrevious, radius, direction, hit, time) => {
 
         let existingLog = false;
         var modifiedResults = this.state.results.map(l => {
@@ -180,7 +203,7 @@ export class Demo extends Component {
             });
         } else {
 
-            let id = Math.log2((2 * distance) / (radius * 2));
+            let id = Math.log2((2 * distanceFromPrevious) / (radius * 2));
             let ip = id / time;
 
             this.setState(prevState => ({
@@ -189,7 +212,8 @@ export class Demo extends Component {
                     device, 
                     sequence, 
                     rep, 
-                    distance, 
+                    circlePathDiamater,
+                    distanceFromPrevious, 
                     radius,
                     id,
                     ip,
@@ -222,8 +246,8 @@ export class Demo extends Component {
                     circles: Array(s.count).fill().map((_, i) => {
                         let rotationOffset = Math.PI * 1.5;
                         return {
-                            x: center.x + Math.cos(rotationOffset + i * (rev / s.count)) * s.distance / 2,
-                            y: center.y + Math.sin(rotationOffset + i * (rev / s.count)) * s.distance / 2,
+                            x: center.x + Math.cos(rotationOffset + i * (rev / s.count)) * s.circlePathDiamater / 2,
+                            y: center.y + Math.sin(rotationOffset + i * (rev / s.count)) * s.circlePathDiamater / 2,
                             radius: s.radius,
                             color: 'lightgray',
                             activeColor: 'crimson'

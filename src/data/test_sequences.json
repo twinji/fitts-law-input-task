@@ -1,55 +1,55 @@
 [
     {
-        "distance": 300,
+        "circlePathDiamater": 300,
         "radius": 20,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 200,
+        "circlePathDiamater": 200,
         "radius": 30,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 700,
+        "circlePathDiamater": 700,
         "radius": 10,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 600,
+        "circlePathDiamater": 600,
         "radius": 40,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 400,
+        "circlePathDiamater": 400,
         "radius": 60,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 200,
+        "circlePathDiamater": 200,
         "radius": 10,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 100,
+        "circlePathDiamater": 100,
         "radius": 10,
         "count": 9,
         "repetitions": 15,
         "direction": 1
     },
     {
-        "distance": 600,
+        "circlePathDiamater": 600,
         "radius": 50,
         "count": 9,
         "repetitions": 15,
