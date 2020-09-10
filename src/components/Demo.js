@@ -179,6 +179,10 @@ export class Demo extends Component {
                 results: modifiedResults
             });
         } else {
+
+            let id = Math.log2((2 * distance) / (radius * 2));
+            let ip = id / time;
+
             this.setState(prevState => ({
                 results: [...prevState.results, {
                     username, 
@@ -186,7 +190,9 @@ export class Demo extends Component {
                     sequence, 
                     rep, 
                     distance, 
-                    radius, 
+                    radius,
+                    id,
+                    ip,
                     direction, 
                     hit, 
                     time, 
