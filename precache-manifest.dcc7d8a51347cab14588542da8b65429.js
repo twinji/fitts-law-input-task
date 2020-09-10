@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "32289ac2c83ebe413a44293f581d5b69",
+    "revision": "0869ff5faf1603627c6d4cc37a4854c0",
     "url": "/fitts-law-input-task/index.html"
   },
   {
-    "revision": "7f43d841d292dd4b4092",
+    "revision": "d9f13b2b4fa5f1490c41",
     "url": "/fitts-law-input-task/static/css/main.3af2278f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/fitts-law-input-task/static/js/2.25ffdff3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7f43d841d292dd4b4092",
-    "url": "/fitts-law-input-task/static/js/main.7ea3f0bd.chunk.js"
+    "revision": "d9f13b2b4fa5f1490c41",
+    "url": "/fitts-law-input-task/static/js/main.301f2f58.chunk.js"
   },
   {
     "revision": "e750ab85f3d424cd270b",
