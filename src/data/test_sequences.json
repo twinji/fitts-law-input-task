@@ -35,6 +35,13 @@
         "direction": 1
     },
     {
+        "circlePathDiamater": 450,
+        "radius": 10,
+        "count": 9,
+        "repetitions": 15,
+        "direction": 1
+    },
+    {
         "circlePathDiamater": 200,
         "radius": 10,
         "count": 9,
@@ -58,6 +65,13 @@
     {
         "circlePathDiamater": 650,
         "radius": 20,
+        "count": 9,
+        "repetitions": 15,
+        "direction": 1
+    },
+    {
+        "circlePathDiamater": 300,
+        "radius": 70,
         "count": 9,
         "repetitions": 15,
         "direction": 1
