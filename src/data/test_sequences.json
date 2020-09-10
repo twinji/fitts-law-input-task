@@ -70,9 +70,9 @@
         "direction": 1
     },
     {
-        "circlePathDiamater": 300,
-        "radius": 70,
-        "count": 9,
+        "circlePathDiamater": 350,
+        "radius": 65,
+        "count": 7,
         "repetitions": 15,
         "direction": 1
     },
