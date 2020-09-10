@@ -64,7 +64,8 @@ export class Demo extends Component {
     
     resumeTest = () => {
         this.setState({
-            isActive: true
+            isActive: true,
+            previousCircleIndex: null
         });
         this.restartTimer();
     }
