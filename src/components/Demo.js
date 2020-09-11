@@ -59,7 +59,7 @@ export class Demo extends Component {
             + this.state.results.map(l => Object.values(l).join(',')).join('\n');
 
         const csvData = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        FileSaver.saveAs(csvData, 'fitts_law_results_' + Date.now().toString() + '.csv');
+        FileSaver.saveAs(csvData, this.state.username + '_' + this.state.device + '_fitts_law_results_' + Date.now().toString() + '.csv');
     }
     
     resumeTest = () => {
