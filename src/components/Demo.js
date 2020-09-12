@@ -102,6 +102,24 @@ export class Demo extends Component {
         })
     }
 
+    skipPractice = () => {
+        if (this.state.isPractice) {
+            this.setState({
+                isActive: false,
+                isPractice: false,
+                sequences: TestSequences
+            }, () => {
+                this.generateCircleData();
+            });
+        }
+    }
+
+    escPressed = (e) => {
+        if (e.keyCode === 27) {
+            this.skipPractice();
+        }
+    }
+
     calculateDistance = (x1, x2, y1, y2) => {
         let deltaX = x2 - x1;
         let deltaY = y2 - y1;
@@ -290,7 +308,12 @@ export class Demo extends Component {
     }
     
     componentDidMount() {
+        document.addEventListener('keydown', this.escPressed, false);
         this.resetTest();
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.escPressed, false);
     }
 
     render() {
@@ -355,9 +378,11 @@ export class Demo extends Component {
                     <Modal.Footer>
                         {
                             !this.state.isComplete &&
-                            <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username || !this.state.device}>
-                                { this.inSequence() ? 'Proceed' : (this.state.isPractice ? 'Begin practice' : 'Begin test')  }
-                            </Button>
+                            <React.Fragment>
+                                <Button variant="primary" onClick={this.resumeTest} disabled={!this.state.username || !this.state.device}>
+                                    { this.inSequence() ? 'Proceed' : (this.state.isPractice ? 'Begin practice' : 'Begin test')  }
+                                </Button>
+                            </React.Fragment>
                         }
                         {
                             (this.state.isComplete && this.state.isPractice) && 
