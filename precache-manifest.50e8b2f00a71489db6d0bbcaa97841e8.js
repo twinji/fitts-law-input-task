@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "136e6ef5e9645d36ac742bc8db13bad4",
+    "revision": "87649355f3cd1b287332694046f388c2",
     "url": "/fitts-law-input-task/index.html"
   },
   {
-    "revision": "9e65872b6c2cb614dd43",
+    "revision": "b93a9bb900c6f7a8691d",
     "url": "/fitts-law-input-task/static/css/main.3af2278f.chunk.css"
   },
   {
-    "revision": "a27a919d5d5187fd8047",
-    "url": "/fitts-law-input-task/static/js/2.25ffdff3.chunk.js"
+    "revision": "438860720d2e24a82520",
+    "url": "/fitts-law-input-task/static/js/2.1cace6f5.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/fitts-law-input-task/static/js/2.25ffdff3.chunk.js.LICENSE.txt"
+    "url": "/fitts-law-input-task/static/js/2.1cace6f5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9e65872b6c2cb614dd43",
-    "url": "/fitts-law-input-task/static/js/main.33d151aa.chunk.js"
+    "revision": "b93a9bb900c6f7a8691d",
+    "url": "/fitts-law-input-task/static/js/main.66a161ae.chunk.js"
   },
   {
     "revision": "e750ab85f3d424cd270b",
